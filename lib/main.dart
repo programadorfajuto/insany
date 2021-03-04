@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:insany/components/card_component.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  static const anotherColor = Color(0xFFFE6A8A);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
           accentColor: Color(0xFF7252AD),
           backgroundColor: Color(0xFFFBFBFC),
           textTheme: GoogleFonts.ralewayTextTheme(Theme.of(context).textTheme)),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'INSANY'),
     );
   }
 }
@@ -33,19 +35,87 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title!),
+        actions: [
+          PopupMenuButton(
+              offset: Offset(0, 70),
+              onSelected: (value) => print(value),
+              icon: Icon(Icons.chevron_right, color: MyApp.anotherColor),
+              itemBuilder: (_) =>
+                  [PopupMenuItem(value: 0, child: Text('Sair'))]),
+        ],
+        toolbarHeight: 70,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(width: 20),
+                Icon(Icons.app_blocking_sharp),
+                Container(width: 20),
+                Text(widget.title!),
+              ],
+            ),
+            Row(
+              children: [
+                Column(
+                  children: [
+                    InkWell(
+                      splashColor: Theme.of(context).accentColor.withAlpha(30),
+                      onTap: () {
+                        print('Card tapped.');
+                      },
+                      child: Text('aoba'),
+                    ),
+                    Container(height: 6),
+                    Container(
+                      height: 2,
+                      width: 30,
+                      color: MyApp.anotherColor,
+                    )
+                  ],
+                ),
+                Container(width: 15),
+                Column(
+                  children: [
+                    InkWell(
+                      splashColor: Theme.of(context).accentColor.withAlpha(30),
+                      onTap: () {
+                        print('Card tapped.');
+                      },
+                      child: Text(
+                        'aoba',
+                        style: TextStyle(color: Colors.white.withAlpha(100)),
+                      ),
+                    ),
+                    Container(height: 6),
+                  ],
+                ),
+                Container(width: 15),
+                Column(
+                  children: [
+                    InkWell(
+                      splashColor: Theme.of(context).accentColor.withAlpha(30),
+                      onTap: () {
+                        print('Card tapped.');
+                      },
+                      child: Text(
+                        'aoba',
+                        style: TextStyle(color: Colors.white.withAlpha(100)),
+                      ),
+                    ),
+                    Container(height: 6),
+                  ],
+                ),
+              ],
+            ),
+            Text('Matheus Stag')
+          ],
+        ),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -63,20 +133,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            // CardComponent(),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ),
     );
   }
